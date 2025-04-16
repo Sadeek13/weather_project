@@ -1,0 +1,19 @@
+import pytest
+from project import get_city_from_ip, get_weather
+
+def test_get_city_from_ip():
+    city = get_city_from_ip()
+    assert isinstance(city, str)
+    assert len(city) > 0
+
+def test_get_weather_valid_city():
+    city = "Hyderabad"
+    weather = get_weather(city)
+    assert weather is not None
+    assert "main" in weather
+    assert "temp" in weather["main"]
+
+def test_get_weather_invalid_city():
+    city = "InvalidCityName1234"
+    weather = get_weather(city)
+    assert weather is None or "main" not in weather
